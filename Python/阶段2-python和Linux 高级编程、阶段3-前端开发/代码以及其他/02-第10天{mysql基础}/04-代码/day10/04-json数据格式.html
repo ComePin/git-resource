@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- json：就是类似于JavaScript对象的字符串，本质上就是一个字符串，同时还一种数据格式，
+        web开发的时候经常使用json数据格式 
+        json的数据格式有两种:
+        1. 对象格式: 最外层的表现形式是一对大括号，key名和字符串数据都要使用双引号
+        2. 数组格式: 最外出的表现形式是一对中括号，每项数据之间使用逗号进行分隔
+    -->
+    <script>
+         // web服务器把json数据给浏览器，当js解析json数据的时候为了方便，把json数据解析成一个javascript对象
+         //  对象格式的json数据
+         var sJson1 = '{"name":"李四", "age":20}';
+         //  把json数据转成JavaScript对象
+         var oPerson = JSON.parse(sJson1);
+         console.log(oPerson);
+         //  获取属性数据
+         console.log(oPerson.name + oPerson.age);
+
+         var sJson2 = '[{"name":"李四", "age":20}, {"name":"李三", "age":21}]';
+         var aArray = JSON.parse(sJson2);
+         console.log(aArray);
+
+         // 通过下标获取指定js对象，然后通过js对象获取name属性
+         var oPerson = aArray[1];
+         console.log(oPerson.name);
+
+         // 扩展: 浏览器给python服务器的json数据，python服务器程序可以解析成字典或者列表
+
+    </script>
+   
+</head>
+<body>
+    
+</body>
+</html>
