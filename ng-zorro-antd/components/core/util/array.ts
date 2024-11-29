@@ -22,6 +22,7 @@ export function arraysEqual<T>(array1: T[], array2: T[]): boolean {
 
   const len = array1.length;
   for (let i = 0; i < len; i++) {
+    // 复杂数组不适用
     if (array1[i] !== array2[i]) {
       return false;
     }

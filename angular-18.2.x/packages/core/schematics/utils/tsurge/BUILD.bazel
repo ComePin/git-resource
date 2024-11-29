@@ -1,0 +1,24 @@
+load("//tools:defaults.bzl", "ts_library")
+
+ts_library(
+    name = "tsurge",
+    srcs = glob(["**/*.ts"]),
+    visibility = [
+        "//packages/core/schematics:__subpackages__",
+    ],
+    deps = [
+        "//packages/compiler-cli",
+        "//packages/compiler-cli/src/ngtsc/core",
+        "//packages/compiler-cli/src/ngtsc/core:api",
+        "//packages/compiler-cli/src/ngtsc/file_system",
+        "//packages/compiler-cli/src/ngtsc/file_system/testing",
+        "//packages/compiler-cli/src/ngtsc/shims",
+        "//packages/compiler-cli/src/ngtsc/translator",
+        "@npm//@types/diff",
+        "@npm//@types/node",
+        "@npm//chalk",
+        "@npm//diff",
+        "@npm//magic-string",
+        "@npm//typescript",
+    ],
+)

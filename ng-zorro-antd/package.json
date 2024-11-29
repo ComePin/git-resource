@@ -29,6 +29,7 @@
     "@ant-design/icons-angular": "^16.0.0",
     "@ctrl/tinycolor": "^3.4.1",
     "date-fns": "^2.16.1",
+    "ng-zorro-antd": "file:",
     "ngx-quicklink": "^0.4.2"
   },
   "devDependencies": {
