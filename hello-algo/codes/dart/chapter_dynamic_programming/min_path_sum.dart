@@ -18,8 +18,8 @@ int minPathSumDFS(List<List<int>> grid, int i, int j) {
     return BigInt.from(2).pow(31).toInt();
   }
   // 计算从左上角到 (i-1, j) 和 (i, j-1) 的最小路径代价
-  int left = minPathSumDFS(grid, i - 1, j);
-  int up = minPathSumDFS(grid, i, j - 1);
+  int up = minPathSumDFS(grid, i - 1, j);
+  int left = minPathSumDFS(grid, i, j - 1);
   // 返回从左上角到 (i, j) 的最小路径代价
   return min(left, up) + grid[i][j];
 }
@@ -40,8 +40,8 @@ int minPathSumDFSMem(List<List<int>> grid, List<List<int>> mem, int i, int j) {
     return mem[i][j];
   }
   // 左边和上边单元格的最小路径代价
-  int left = minPathSumDFSMem(grid, mem, i - 1, j);
-  int up = minPathSumDFSMem(grid, mem, i, j - 1);
+  int up = minPathSumDFSMem(grid, mem, i - 1, j);
+  int left = minPathSumDFSMem(grid, mem, i, j - 1);
   // 记录并返回左上角到 (i, j) 的最小路径代价
   mem[i][j] = min(left, up) + grid[i][j];
   return mem[i][j];
@@ -61,7 +61,7 @@ int minPathSumDP(List<List<int>> grid) {
   for (int i = 1; i < n; i++) {
     dp[i][0] = dp[i - 1][0] + grid[i][0];
   }
-  // 状态转移：其余行列
+  // 状态转移：其余行和列
   for (int i = 1; i < n; i++) {
     for (int j = 1; j < m; j++) {
       dp[i][j] = min(dp[i][j - 1], dp[i - 1][j]) + grid[i][j];
@@ -103,18 +103,18 @@ void main() {
 
 // 暴力搜索
   int res = minPathSumDFS(grid, n - 1, m - 1);
-  print("从左上角到右下角的做小路径和为 $res");
+  print("从左上角到右下角的最小路径和为 $res");
 
 // 记忆化搜索
   List<List<int>> mem = List.generate(n, (i) => List.filled(m, -1));
   res = minPathSumDFSMem(grid, mem, n - 1, m - 1);
-  print("从左上角到右下角的做小路径和为 $res");
+  print("从左上角到右下角的最小路径和为 $res");
 
 // 动态规划
   res = minPathSumDP(grid);
-  print("从左上角到右下角的做小路径和为 $res");
+  print("从左上角到右下角的最小路径和为 $res");
 
 // 空间优化后的动态规划
   res = minPathSumDPComp(grid);
-  print("从左上角到右下角的做小路径和为 $res");
+  print("从左上角到右下角的最小路径和为 $res");
 }

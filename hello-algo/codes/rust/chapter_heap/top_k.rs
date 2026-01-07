@@ -4,14 +4,14 @@
  * Author: night-cruise (2586447362@qq.com)
  */
 
-include!("../include/include.rs");
+use hello_algo_rust::include::print_util;
 
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 
 /* 基于堆查找数组中最大的 k 个元素 */
 fn top_k_heap(nums: Vec<i32>, k: usize) -> BinaryHeap<Reverse<i32>> {
-    // Rust 的 BinaryHeap 是大顶堆，使用 Reverse 将元素大小反转
+    // BinaryHeap 是大顶堆，使用 Reverse 将元素取反，从而实现小顶堆
     let mut heap = BinaryHeap::<Reverse<i32>>::new();
     // 将数组的前 k 个元素入堆
     for &num in nums.iter().take(k) {

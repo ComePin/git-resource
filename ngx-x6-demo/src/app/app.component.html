@@ -1,0 +1,61 @@
+<section class="header">
+  <table>
+    <tr>
+      <th>类别</th>
+      <th>操作</th>
+    </tr>
+    <tr>
+      <td>画布</td>
+      <td>
+        <button (click)="clear()">清除</button>
+        <button (click)="print()">打印画布数据</button>
+        <button (click)="manhattan()">让默认的连接线躲避障碍物</button>
+      </td>
+    </tr>
+    <tr>
+      <td>节点</td>
+      <td>
+        <button (click)="addNode1()">添加节点(构造函数)</button>
+        <button (click)="addNode2()">添加节点(graph自带)</button>
+        <button (click)="addNode3()">添加节点(HTML)</button>
+        <button (click)="removeNode()">hover删除节点</button>
+      </td>
+    </tr>
+    <tr>
+      <td>边(连接线)</td>
+      <td>
+        <button (click)="addEdgeWithNode()">添加边(节点对节点)</button>
+        <button (click)="addPortWithoutEdge()">添加桩点(无连接线)</button>
+        <button (click)="addPortWithEdge()">添加桩点(有连接线)</button>
+        <button (click)="addPortWithManhattan()">躲避障碍物的连接线</button>
+      </td>
+    </tr>
+    <tr>
+      <td>拖拽</td>
+      <td>
+        <div *ngIf="dndFinishWithJudge" class="images">
+          <img [src]="Heros.get('Timor')" data-label="Timor" (mousedown)="startDrag($event)">
+          <img [src]="Heros.get('Morgana')" data-label="Morgana" (mousedown)="startDrag($event)">
+          <img [src]="Heros.get('Yasuo')" data-label="Yasuo" (mousedown)="startDrag($event)">
+          <img [src]="Heros.get('Jinx')" data-label="Jinx" (mousedown)="startDrag($event)">
+        </div>
+        <button *ngIf="!dndFinishWithJudge" (click)="initDndWithJudge()">初始化拖拽</button>
+      </td>
+    </tr>
+    <tr>
+      <td>将Angular组件作为节点</td>
+      <td>
+        <button (click)="addAngularComponent()">Add angular component</button>
+        <button (click)="addAngularTemplate()">Add angular template</button>
+        <button (click)="addAngularWithCallback()">使用回调函数渲染</button>
+        <!-- <button (click)="showBug()">showBug</button> -->
+      </td>
+    </tr>
+  </table>
+</section>
+
+<div id="container" #container></div>
+
+<ng-template #demoTpl let-data="ngArguments">
+  <div>{{ data.title }}</div>
+</ng-template>

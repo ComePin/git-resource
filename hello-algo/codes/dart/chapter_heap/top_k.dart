@@ -8,7 +8,7 @@ import '../utils/print_util.dart';
 
 /* 基于堆查找数组中最大的 k 个元素 */
 MinHeap topKHeap(List<int> nums, int k) {
-  // 将数组的前 k 个元素入堆
+  // 初始化小顶堆，将数组的前 k 个元素入堆
   MinHeap heap = MinHeap(nums.sublist(0, k));
   // 从第 k+1 个元素开始，保持堆的长度为 k
   for (int i = k; i < nums.length; i++) {
@@ -50,17 +50,17 @@ class MinHeap {
     return _minHeap;
   }
 
-  /* 获取左子节点索引 */
+  /* 获取左子节点的索引 */
   int _left(int i) {
     return 2 * i + 1;
   }
 
-  /* 获取右子节点索引 */
+  /* 获取右子节点的索引 */
   int _right(int i) {
     return 2 * i + 2;
   }
 
-  /* 获取父节点索引 */
+  /* 获取父节点的索引 */
   int _parent(int i) {
     return (i - 1) ~/ 2; // 向下整除
   }
@@ -115,7 +115,7 @@ class MinHeap {
   int pop() {
     // 判空处理
     if (isEmpty()) throw Exception('堆为空');
-    // 交换根节点与最右叶节点（即交换首元素与尾元素）
+    // 交换根节点与最右叶节点（交换首元素与尾元素）
     _swap(0, size() - 1);
     // 删除节点
     int val = _minHeap.removeLast();

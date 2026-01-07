@@ -24,7 +24,7 @@ function editDistanceDFS(s: string, t: string, i: number, j: number): number {
     const del = editDistanceDFS(s, t, i - 1, j);
     const replace = editDistanceDFS(s, t, i - 1, j - 1);
     // 返回最少编辑步数
-    return Math.min(Math.min(insert, del), replace) + 1;
+    return Math.min(insert, del, replace) + 1;
 }
 
 /* 编辑距离：记忆化搜索 */
@@ -56,7 +56,7 @@ function editDistanceDFSMem(
     const del = editDistanceDFSMem(s, t, mem, i - 1, j);
     const replace = editDistanceDFSMem(s, t, mem, i - 1, j - 1);
     // 记录并返回最少编辑步数
-    mem[i][j] = Math.min(Math.min(insert, del), replace) + 1;
+    mem[i][j] = Math.min(insert, del, replace) + 1;
     return mem[i][j];
 }
 
@@ -74,7 +74,7 @@ function editDistanceDP(s: string, t: string): number {
     for (let j = 1; j <= m; j++) {
         dp[0][j] = j;
     }
-    // 状态转移：其余行列
+    // 状态转移：其余行和列
     for (let i = 1; i <= n; i++) {
         for (let j = 1; j <= m; j++) {
             if (s.charAt(i - 1) === t.charAt(j - 1)) {
@@ -83,17 +83,14 @@ function editDistanceDP(s: string, t: string): number {
             } else {
                 // 最少编辑步数 = 插入、删除、替换这三种操作的最少编辑步数 + 1
                 dp[i][j] =
-                    Math.min(
-                        Math.min(dp[i][j - 1], dp[i - 1][j]),
-                        dp[i - 1][j - 1]
-                    ) + 1;
+                    Math.min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1;
             }
         }
     }
     return dp[n][m];
 }
 
-/* 编辑距离：状态压缩后的动态规划 */
+/* 编辑距离：空间优化后的动态规划 */
 function editDistanceDPComp(s: string, t: string): number {
     const n = s.length,
         m = t.length;
@@ -115,7 +112,7 @@ function editDistanceDPComp(s: string, t: string): number {
                 dp[j] = leftup;
             } else {
                 // 最少编辑步数 = 插入、删除、替换这三种操作的最少编辑步数 + 1
-                dp[j] = Math.min(Math.min(dp[j - 1], dp[j]), leftup) + 1;
+                dp[j] = Math.min(dp[j - 1], dp[j], leftup) + 1;
             }
             leftup = temp; // 更新为下一轮的 dp[i-1, j-1]
         }
@@ -144,7 +141,7 @@ console.log(`将 ${s} 更改为 ${t} 最少需要编辑 ${res} 步`);
 res = editDistanceDP(s, t);
 console.log(`将 ${s} 更改为 ${t} 最少需要编辑 ${res} 步`);
 
-// 状态压缩后的动态规划
+// 空间优化后的动态规划
 res = editDistanceDPComp(s, t);
 console.log(`将 ${s} 更改为 ${t} 最少需要编辑 ${res} 步`);
 

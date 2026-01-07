@@ -14,7 +14,7 @@ class Pair:
 
 
 class ArrayHashMap:
-    """基于数组简易实现的哈希表"""
+    """基于数组实现的哈希表"""
 
     def __init__(self):
         """构造方法"""
@@ -26,7 +26,7 @@ class ArrayHashMap:
         index = key % 100
         return index
 
-    def get(self, key: int) -> str:
+    def get(self, key: int) -> str | None:
         """查询操作"""
         index: int = self.hash_func(key)
         pair: Pair = self.buckets[index]
@@ -35,7 +35,7 @@ class ArrayHashMap:
         return pair.val
 
     def put(self, key: int, val: str):
-        """添加操作"""
+        """添加和更新操作"""
         pair = Pair(key, val)
         index: int = self.hash_func(key)
         self.buckets[index] = pair
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     hmap.print()
 
     # 查询操作
-    # 向哈希表输入键 key ，得到值 value
+    # 向哈希表中输入键 key ，得到值 value
     name = hmap.get(15937)
     print("\n输入学号 15937 ，查询到姓名 " + name)
 

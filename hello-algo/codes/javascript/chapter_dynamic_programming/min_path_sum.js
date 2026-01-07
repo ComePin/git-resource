@@ -15,8 +15,8 @@ function minPathSumDFS(grid, i, j) {
         return Infinity;
     }
     // 计算从左上角到 (i-1, j) 和 (i, j-1) 的最小路径代价
-    const left = minPathSumDFS(grid, i - 1, j);
-    const up = minPathSumDFS(grid, i, j - 1);
+    const up = minPathSumDFS(grid, i - 1, j);
+    const left = minPathSumDFS(grid, i, j - 1);
     // 返回从左上角到 (i, j) 的最小路径代价
     return Math.min(left, up) + grid[i][j];
 }
@@ -36,8 +36,8 @@ function minPathSumDFSMem(grid, mem, i, j) {
         return mem[i][j];
     }
     // 左边和上边单元格的最小路径代价
-    const left = minPathSumDFSMem(grid, mem, i - 1, j);
-    const up = minPathSumDFSMem(grid, mem, i, j - 1);
+    const up = minPathSumDFSMem(grid, mem, i - 1, j);
+    const left = minPathSumDFSMem(grid, mem, i, j - 1);
     // 记录并返回左上角到 (i, j) 的最小路径代价
     mem[i][j] = Math.min(left, up) + grid[i][j];
     return mem[i][j];
@@ -60,7 +60,7 @@ function minPathSumDP(grid) {
     for (let i = 1; i < n; i++) {
         dp[i][0] = dp[i - 1][0] + grid[i][0];
     }
-    // 状态转移：其余行列
+    // 状态转移：其余行和列
     for (let i = 1; i < n; i++) {
         for (let j = 1; j < m; j++) {
             dp[i][j] = Math.min(dp[i][j - 1], dp[i - 1][j]) + grid[i][j];
@@ -69,7 +69,7 @@ function minPathSumDP(grid) {
     return dp[n - 1][m - 1];
 }
 
-/* 最小路径和：状态压缩后的动态规划 */
+/* 最小路径和：空间优化后的动态规划 */
 function minPathSumDPComp(grid) {
     const n = grid.length,
         m = grid[0].length;
@@ -116,6 +116,6 @@ console.log(`从左上角到右下角的最小路径和为 ${res}`);
 res = minPathSumDP(grid);
 console.log(`从左上角到右下角的最小路径和为 ${res}`);
 
-// 状态压缩后的动态规划
+// 空间优化后的动态规划
 res = minPathSumDPComp(grid);
 console.log(`从左上角到右下角的最小路径和为 ${res}`);

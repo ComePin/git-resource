@@ -1,13 +1,14 @@
 """
 File: space_complexity.py
 Created Time: 2022-11-25
-Author: Krahets (krahets@163.com)
+Author: krahets (krahets@163.com)
 """
 
-import sys, os.path as osp
+import sys
+from pathlib import Path
 
-sys.path.append(osp.dirname(osp.dirname(osp.abspath(__file__))))
-from modules import *
+sys.path.append(str(Path(__file__).parent.parent))
+from modules import ListNode, TreeNode, print_tree
 
 
 def function() -> int:

@@ -1,7 +1,7 @@
 """
 File: min_path_sum.py
 Created Time: 2023-07-04
-Author: Krahets (krahets@163.com)
+Author: krahets (krahets@163.com)
 """
 
 from math import inf
@@ -16,8 +16,8 @@ def min_path_sum_dfs(grid: list[list[int]], i: int, j: int) -> int:
     if i < 0 or j < 0:
         return inf
     # 计算从左上角到 (i-1, j) 和 (i, j-1) 的最小路径代价
-    left = min_path_sum_dfs(grid, i - 1, j)
-    up = min_path_sum_dfs(grid, i, j - 1)
+    up = min_path_sum_dfs(grid, i - 1, j)
+    left = min_path_sum_dfs(grid, i, j - 1)
     # 返回从左上角到 (i, j) 的最小路径代价
     return min(left, up) + grid[i][j]
 
@@ -36,8 +36,8 @@ def min_path_sum_dfs_mem(
     if mem[i][j] != -1:
         return mem[i][j]
     # 左边和上边单元格的最小路径代价
-    left = min_path_sum_dfs_mem(grid, mem, i - 1, j)
-    up = min_path_sum_dfs_mem(grid, mem, i, j - 1)
+    up = min_path_sum_dfs_mem(grid, mem, i - 1, j)
+    left = min_path_sum_dfs_mem(grid, mem, i, j - 1)
     # 记录并返回左上角到 (i, j) 的最小路径代价
     mem[i][j] = min(left, up) + grid[i][j]
     return mem[i][j]
@@ -55,7 +55,7 @@ def min_path_sum_dp(grid: list[list[int]]) -> int:
     # 状态转移：首列
     for i in range(1, n):
         dp[i][0] = dp[i - 1][0] + grid[i][0]
-    # 状态转移：其余行列
+    # 状态转移：其余行和列
     for i in range(1, n):
         for j in range(1, m):
             dp[i][j] = min(dp[i][j - 1], dp[i - 1][j]) + grid[i][j]
@@ -88,17 +88,17 @@ if __name__ == "__main__":
 
     # 暴力搜索
     res = min_path_sum_dfs(grid, n - 1, m - 1)
-    print(f"从左上角到右下角的做小路径和为 {res}")
+    print(f"从左上角到右下角的最小路径和为 {res}")
 
     # 记忆化搜索
     mem = [[-1] * m for _ in range(n)]
     res = min_path_sum_dfs_mem(grid, mem, n - 1, m - 1)
-    print(f"从左上角到右下角的做小路径和为 {res}")
+    print(f"从左上角到右下角的最小路径和为 {res}")
 
     # 动态规划
     res = min_path_sum_dp(grid)
-    print(f"从左上角到右下角的做小路径和为 {res}")
+    print(f"从左上角到右下角的最小路径和为 {res}")
 
     # 空间优化后的动态规划
     res = min_path_sum_dp_comp(grid)
-    print(f"从左上角到右下角的做小路径和为 {res}")
+    print(f"从左上角到右下角的最小路径和为 {res}")

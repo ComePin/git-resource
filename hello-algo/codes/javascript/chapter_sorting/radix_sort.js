@@ -12,7 +12,7 @@ function digit(num, exp) {
 
 /* 计数排序（根据 nums 第 k 位排序） */
 function countingSortDigit(nums, exp) {
-    // 十进制的位范围为 0~9 ，因此需要长度为 10 的桶
+    // 十进制的位范围为 0~9 ，因此需要长度为 10 的桶数组
     const counter = new Array(10).fill(0);
     const n = nums.length;
     // 统计 0~9 各数字的出现次数
@@ -41,12 +41,7 @@ function countingSortDigit(nums, exp) {
 /* 基数排序 */
 function radixSort(nums) {
     // 获取数组的最大元素，用于判断最大位数
-    let m = Number.MIN_VALUE;
-    for (const num of nums) {
-        if (num > m) {
-            m = num;
-        }
-    }
+    let m = Math.max(... nums);
     // 按照从低位到高位的顺序遍历
     for (let exp = 1; exp <= m; exp *= 10) {
         // 对数组元素的第 k 位执行计数排序

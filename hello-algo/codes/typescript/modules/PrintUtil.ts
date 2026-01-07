@@ -7,10 +7,7 @@
 import { ListNode } from './ListNode';
 import { TreeNode, arrToTree } from './TreeNode';
 
-/**
- * Print a linked list
- * @param head
- */
+/* 打印链表 */
 function printLinkedList(head: ListNode | null): void {
     const list: string[] = [];
     while (head !== null) {
@@ -31,25 +28,19 @@ class Trunk {
 }
 
 /**
- * The interface of the tree printer
+ * 打印二叉树
  * This tree printer is borrowed from TECHIE DELIGHT
  * https://www.techiedelight.com/c-program-print-binary-tree/
- * @param root
  */
 function printTree(root: TreeNode | null) {
     printTreeHelper(root, null, false);
 }
 
-/**
- * Print a binary tree
- * @param root
- * @param prev
- * @param isLeft
- */
+/* 打印二叉树 */
 function printTreeHelper(
     root: TreeNode | null,
     prev: Trunk | null,
-    isLeft: boolean
+    isRight: boolean
 ) {
     if (root === null) {
         return;
@@ -62,7 +53,7 @@ function printTreeHelper(
 
     if (prev === null) {
         trunk.str = '———';
-    } else if (isLeft) {
+    } else if (isRight) {
         trunk.str = '/———';
         prev_str = '   |';
     } else {
@@ -81,10 +72,6 @@ function printTreeHelper(
     printTreeHelper(root.left, trunk, false);
 }
 
-/**
- * Helper function to print branches of the binary tree
- * @param p
- */
 function showTrunks(p: Trunk | null) {
     if (p === null) {
         return;
@@ -92,15 +79,9 @@ function showTrunks(p: Trunk | null) {
 
     showTrunks(p.prev);
     process.stdout.write(p.str);
-    // ts-node to execute, we need to install type definitions for node
-    // solve: npm i --save-dev @types/node
-    // restart the vscode
 }
 
-/**
- * Print a heap
- * @param arr
- */
+/* 打印堆 */
 function printHeap(arr: number[]): void {
     console.log('堆的数组表示：');
     console.log(arr);

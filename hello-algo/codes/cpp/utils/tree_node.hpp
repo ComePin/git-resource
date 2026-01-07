@@ -1,7 +1,7 @@
 /**
  * File: tree_node.hpp
  * Created Time: 2021-12-19
- * Author: Krahets (krahets@163.com)
+ * Author: krahets (krahets@163.com)
  */
 
 #pragma once
@@ -74,12 +74,11 @@ vector<int> treeToVecor(TreeNode *root) {
     return res;
 }
 
-/* Free the memory allocated to a tree */
+/* 释放二叉树内存 */
 void freeMemoryTree(TreeNode *root) {
     if (root == nullptr)
         return;
     freeMemoryTree(root->left);
     freeMemoryTree(root->right);
-    // 释放内存
     delete root;
 }

@@ -45,7 +45,7 @@ impl GraphAdjMat {
         // 在邻接矩阵中添加一行
         self.adj_mat.push(vec![0; n]);
         // 在邻接矩阵中添加一列
-        for row in &mut self.adj_mat {
+        for row in self.adj_mat.iter_mut() {
             row.push(0);
         }
     }
@@ -60,7 +60,7 @@ impl GraphAdjMat {
         // 在邻接矩阵中删除索引 index 的行
         self.adj_mat.remove(index);
         // 在邻接矩阵中删除索引 index 的列
-        for row in &mut self.adj_mat {
+        for row in self.adj_mat.iter_mut() {
             row.remove(index);
         }
     }
@@ -72,7 +72,7 @@ impl GraphAdjMat {
         if i >= self.size() || j >= self.size() || i == j {
             panic!("index error")
         }
-        // 在无向图中，邻接矩阵沿主对角线对称，即满足 (i, j) == (j, i)
+        // 在无向图中，邻接矩阵关于主对角线对称，即满足 (i, j) == (j, i)
         self.adj_mat[i][j] = 1;
         self.adj_mat[j][i] = 1;
     }

@@ -1,4 +1,0 @@
-import mydecorator
-
-
-mydecorator.comment()

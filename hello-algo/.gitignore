@@ -1,7 +1,7 @@
 # macOS
 .DS_Store
 
-# Editor
+# editors
 .vscode/
 **/.idea
 
@@ -12,11 +12,3 @@
 /build
 /site
 /utils
-
-# test script
-test.sh
-
-# overrides
-docs/overrides/partials/*
-!docs/overrides/partials/content.html
-!docs/overrides/partials/footer.html

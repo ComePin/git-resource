@@ -8,7 +8,7 @@ const { Vertex } = require('../modules/Vertex');
 
 /* 基于邻接表实现的无向图类 */
 class GraphAdjList {
-    // 邻接表，key: 顶点，value：该顶点的所有邻接顶点
+    // 邻接表，key：顶点，value：该顶点的所有邻接顶点
     adjList;
 
     /* 构造方法 */
@@ -46,7 +46,8 @@ class GraphAdjList {
         if (
             !this.adjList.has(vet1) ||
             !this.adjList.has(vet2) ||
-            vet1 === vet2
+            vet1 === vet2 ||
+            this.adjList.get(vet1).indexOf(vet2) === -1
         ) {
             throw new Error('Illegal Argument Exception');
         }

@@ -5,18 +5,18 @@
  */
 
 /* 基于环形数组实现的队列 */
-struct ArrayQueue {
-    nums: Vec<i32>,     // 用于存储队列元素的数组
-    front: i32,         // 队首指针，指向队首元素
-    que_size: i32,      // 队列长度
-    que_capacity: i32,  // 队列容量
+struct ArrayQueue<T> {
+    nums: Vec<T>,      // 用于存储队列元素的数组
+    front: i32,        // 队首指针，指向队首元素
+    que_size: i32,     // 队列长度
+    que_capacity: i32, // 队列容量
 }
 
-impl ArrayQueue {
+impl<T: Copy + Default> ArrayQueue<T> {
     /* 构造方法 */
-    fn new(capacity: i32) -> ArrayQueue {
+    fn new(capacity: i32) -> ArrayQueue<T> {
         ArrayQueue {
-            nums: vec![0; capacity as usize],
+            nums: vec![T::default(); capacity as usize],
             front: 0,
             que_size: 0,
             que_capacity: capacity,
@@ -39,13 +39,13 @@ impl ArrayQueue {
     }
 
     /* 入队 */
-    fn push(&mut self, num: i32) {
+    fn push(&mut self, num: T) {
         if self.que_size == self.capacity() {
             println!("队列已满");
             return;
         }
-        // 计算尾指针，指向队尾索引 + 1
-        // 通过取余操作，实现 rear 越过数组尾部后回到头部
+        // 计算队尾指针，指向队尾索引 + 1
+        // 通过取余操作实现 rear 越过数组尾部后回到头部
         let rear = (self.front + self.que_size) % self.que_capacity;
         // 将 num 添加至队尾
         self.nums[rear as usize] = num;
@@ -53,16 +53,16 @@ impl ArrayQueue {
     }
 
     /* 出队 */
-    fn pop(&mut self) -> i32 {
+    fn pop(&mut self) -> T {
         let num = self.peek();
-        // 队首指针向后移动一位，若越过尾部则返回到数组头部
+        // 队首指针向后移动一位，若越过尾部，则返回到数组头部
         self.front = (self.front + 1) % self.que_capacity;
         self.que_size -= 1;
         num
     }
 
     /* 访问队首元素 */
-    fn peek(&self) -> i32 {
+    fn peek(&self) -> T {
         if self.is_empty() {
             panic!("index out of bounds");
         }
@@ -70,10 +70,10 @@ impl ArrayQueue {
     }
 
     /* 返回数组 */
-    fn to_vector(&self) -> Vec<i32> {
+    fn to_vector(&self) -> Vec<T> {
         let cap = self.que_capacity;
         let mut j = self.front;
-        let mut arr = vec![0; self.que_size as usize];
+        let mut arr = vec![T::default(); cap as usize];
         for i in 0..self.que_size {
             arr[i as usize] = self.nums[(j % cap) as usize];
             j += 1;

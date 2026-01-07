@@ -1,13 +1,8 @@
 """
 File: permutations_i.py
 Created Time: 2023-04-15
-Author: Krahets (krahets@163.com)
+Author: krahets (krahets@163.com)
 """
-
-import sys, os.path as osp
-
-sys.path.append(osp.dirname(osp.dirname(osp.abspath(__file__))))
-from modules import *
 
 
 def backtrack(
